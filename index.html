@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Danielle — Art Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/port.css" />  
+  <!-- <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0e0d0b;
+      --cream: #f7f3ec;
+      --warm: #f0e8d8;
+      --accent: #d4622a;
+      --accent-light: #f5ddd0;
+      --muted: #8a8278;
+      --border: #e0d8cc;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      font-weight: 300;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 3rem;
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.5rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 88vh;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-left {
+      padding: 5rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      border-right: 1px solid var(--border);
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-left h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 6vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+    }
+
+    .hero-left h1 em {
+      font-style: italic;
+      color: var(--accent);
+      display: block;
+    }
+
+    .hero-left p {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 340px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--ink);
+      color: var(--cream);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.9rem 1.8rem;
+      border-radius: 2px;
+      align-self: flex-start;
+      transition: background 0.2s;
+    }
+
+    .hero-cta:hover { background: var(--accent); }
+
+    .hero-right {
+      background: var(--warm);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-art-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding: 3rem;
+      text-align: center;
+    }
+
+    .hero-art-placeholder svg { opacity: 0.2; }
+
+    .hero-art-placeholder p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+    }
+
+    /* Replace the placeholder by swapping in: <img src="images/hero.jpg" style="width:100%;height:100%;object-fit:cover;" alt="Featured artwork" /> */
+
+    .hero-index-badge {
+      position: absolute;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.5rem 1rem;
+      border-radius: 2px;
+    }
+
+    /* SECTION DIVIDER */
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 3rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--cream);
+    }
+
+    .divider-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      margin: 0 1.5rem;
+    }
+
+    .divider-count {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* GALLERY */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .art-card {
+      position: relative;
+      overflow: hidden;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+    }
+
+    .art-card:nth-child(3n) { border-right: none; }
+
+    .art-card.tall { grid-row: span 2; }
+
+    .art-card-inner {
+      aspect-ratio: 3/4;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.5s cubic-bezier(.22,.61,.36,1);
+    }
+
+    .art-card.tall .art-card-inner { aspect-ratio: unset; min-height: 100%; }
+
+    .art-card:hover .art-card-inner { transform: scale(1.04); }
+
+    .art-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .art-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+
+    .art-placeholder svg { opacity: 0.18; }
+    .art-placeholder p { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; }
+
+    .art-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.25rem 1.25rem 1.1rem;
+      background: var(--cream);
+      border-top: 1px solid var(--border);
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(.22,.61,.36,1);
+    }
+
+    .art-card:hover .art-caption { transform: translateY(0); }
+
+    .art-caption strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+      font-weight: 400;
+    }
+
+    .art-caption span {
+      font-size: 0.7rem;
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Placeholder tints */
+    .t1 { background: #f5ede3; }
+    .t2 { background: #e8eedf; }
+    .t3 { background: #e3eaf5; }
+    .t4 { background: #f5e3ee; }
+    .t5 { background: #eae3f5; }
+    .t6 { background: #f5f0e3; }
+
+    /* ABOUT */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about-img-wrap {
+      background: var(--warm);
+      border-right: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 520px;
+      overflow: hidden;
+    }
+
+    .about-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-img-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .about-img-placeholder svg { opacity: 0.2; }
+    .about-img-placeholder p { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.1em; }
+
+    .about-text {
+      padding: 4rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .about-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-text h2 em { font-style: italic; color: var(--accent); }
+
+    .about-text p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 1.1rem;
+    }
+
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 0.35rem 0.85rem;
+      border-radius: 2px;
+    }
+
+    /* CONTACT BANNER */
+    .contact-banner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 2rem;
+      padding: 4rem 3rem;
+      background: var(--ink);
+      border-bottom: 1px solid #2a2820;
+    }
+
+    .contact-banner h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .contact-banner p {
+      color: rgba(247,243,236,0.5);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .contact-btn {
+      background: var(--accent);
+      color: #fff;
+      padding: 1rem 2.25rem;
+      border-radius: 2px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+
+    .contact-btn:hover { opacity: 0.85; }
+
+    /* FOOTER */
+    footer {
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer p { font-size: 0.75rem; color: var(--muted); }
+
+    .socials { display: flex; gap: 1.5rem; }
+
+    .socials a {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .socials a:hover { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 3rem 1.5rem; border-right: none; border-bottom: 1px solid var(--border); }
+      .hero-right { min-height: 340px; border: none; }
+      .divider { padding: 1rem 1.5rem; }
+      .gallery { grid-template-columns: 1fr 1fr; }
+      .art-card.tall { grid-row: span 1; }
+      .about { grid-template-columns: 1fr; }
+      .about-img-wrap { min-height: 280px; border-right: none; border-bottom: 1px solid var(--border); }
+      .about-text { padding: 2.5rem 1.5rem; }
+      .contact-banner { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 0.75rem; text-align: center; }
+    }
+  </style> -->
+</head>
+<body>
+
+  <nav>
+    <a class="logo" href="#">Danielle</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Portfolio — 2026</p>
+      <h1>Making art<br><em>with intention</em></h1>
+      <p>Bold color, playful composition, and the everyday wonder that makes life worth noticing.</p>
+      <a class="hero-cta" href="#work">View my work &rarr;</a>
+    </div>
+    <div class="hero-right">
+      <!--
+        TO ADD YOUR HERO IMAGE:
+        Remove the div.hero-art-placeholder below and replace with:
+        <img src="images/hero.jpg" style="width:100%;height:100%;object-fit:cover;" alt="Featured artwork" />
+      -->
+      <div class="hero-art-placeholder">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#8a8278" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <p>Featured artwork here</p>
+      </div>
+      <span class="hero-index-badge">Available for commissions</span>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <div class="divider" id="work">
+    <span class="divider-label">Selected work</span>
+    <span class="divider-line"></span>
+    <span class="divider-count">Twelve pieces</span>
+  </div>
+
+  <section class="gallery">
+
+    <!-- PIECE 1
+         To add your image: remove the art-placeholder div and replace with
+         <img src="images/piece1.jpg" alt="Your title" />
+         inside the art-card-inner div -->
+    <div class="art-card">
+      <div class="art-card-inner t1">
+        <div class="art-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#8a8278" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <p>artwork here</p>
+        </div>
+      </div>
+      <div class="art-caption">
+        <strong>Artwork Title</strong>
+        <span>Medium &middot; Year</span>
+      </div>
+    </div>
+
+    <!-- PIECE 3 -->
+    <div class="art-card">
+      <div class="art-card-inner t3">
+        <div class="art-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#8a8278" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <p>artwork here</p>
+        </div>
+      </div>
+      <div class="art-caption">
+        <strong>Artwork Title</strong>
+        <span>Medium &middot; Year</span>
+      </div>
+    </div>
+
+    <!-- PIECE 3 -->
+    <div class="art-card">
+      <div class="art-card-inner t3">
+        <div class="art-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#8a8278" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <p>artwork here</p>
+        </div>
+      </div>
+      <div class="art-caption">
+        <strong>Artwork Title</strong>
+        <span>Medium &middot; Year</span>
+      </div>
+    </div>
+
+    <!-- PIECE 4 -->
+    <div class="art-card">
+      <div class="art-card-inner t4">
+        <div class="art-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#8a8278" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <p>artwork here</p>
+        </div>
+      </div>
+      <div class="art-caption">
+        <strong>Artwork Title</strong>
+        <span>Medium &middot; Year</span>
+      </div>
+    </div>
+
+    <!-- PIECE 5 -->
+    <div class="art-card">
+      <div class="art-card-inner t5">
+        <div class="art-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#8a8278" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <p>artwork here</p>
+        </div>
+      </div>
+      <div class="art-caption">
+        <strong>Artwork Title</strong>
+        <span>Medium &middot; Year</span>
+      </div>
+    </div>
+
+    <!-- PIECE 6 -->
+    <div class="art-card">
+      <div class="art-card-inner t6">
+        <div class="art-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#8a8278" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <p>artwork here</p>
+        </div>
+      </div>
+      <div class="art-caption">
+        <strong>Artwork Title</strong>
+        <span>Medium &middot; Year</span>
+      </div>
+    </div>
+
+    <!-- PIECE 3 -->
+    <div class="art-card">
+      <div class="art-card-inner t3">
+        <div class="art-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#8a8278" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <p>artwork here</p>
+        </div>
+      </div>
+      <div class="art-caption">
+        <strong>Artwork Title</strong>
+        <span>Medium &middot; Year</span>
+      </div>
+    </div>
+
+     <!-- PIECE 3 -->
+    <div class="art-card">
+      <div class="art-card-inner t3">
+        <div class="art-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#8a8278" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <p>artwork here</p>
+        </div>
+      </div>
+      <div class="art-caption">
+        <strong>Artwork Title</strong>
+        <span>Medium &middot; Year</span>
+      </div>
+    </div>
+
+     <!-- PIECE 3 -->
+    <div class="art-card">
+      <div class="art-card-inner t3">
+        <div class="art-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#8a8278" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <p>artwork here</p>
+        </div>
+      </div>
+      <div class="art-caption">
+        <strong>Artwork Title</strong>
+        <span>Medium &middot; Year</span>
+      </div>
+    </div>
+
+     <!-- PIECE 3 -->
+    <div class="art-card">
+      <div class="art-card-inner t3">
+        <div class="art-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#8a8278" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <p>artwork here</p>
+        </div>
+      </div>
+      <div class="art-caption">
+        <strong>Artwork Title</strong>
+        <span>Medium &middot; Year</span>
+      </div>
+    </div>
+
+     <!-- PIECE 3 -->
+    <div class="art-card">
+      <div class="art-card-inner t3">
+        <div class="art-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#8a8278" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <p>artwork here</p>
+        </div>
+      </div>
+      <div class="art-caption">
+        <strong>Artwork Title</strong>
+        <span>Medium &middot; Year</span>
+      </div>
+    </div>
+
+     <!-- PIECE 3 -->
+    <div class="art-card">
+      <div class="art-card-inner t3">
+        <div class="art-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#8a8278" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <p>artwork here</p>
+        </div>
+      </div>
+      <div class="art-caption">
+        <strong>Artwork Title</strong>
+        <span>Medium &middot; Year</span>
+      </div>
+    </div>
+
+    
+
+  </section>
+
+  <!-- ABOUT -->
+  <div class="divider" id="about">
+    <span class="divider-label">About</span>
+    <span class="divider-line"></span>
+  </div>
+
+  <section class="about">
+    <div class="about-img-wrap">
+      <!--
+        TO ADD YOUR PHOTO:
+        Remove the div.about-img-placeholder below and replace with:
+        <img src="images/danielle.jpg" alt="Danielle" />
+      -->
+      <div class="about-img-placeholder">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#8a8278" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        <p> photo here</p>
+      </div>
+    </div>
+    <div class="about-text">
+      <h2>Hi, I'm<br><em>Danielle</em></h2>
+      <p>
+     My name is Dani, Im a Graphic and Web designer working in the Puget Sound region, I
+    specialize in creating graphics that blend storytelling with my personal touches. I mostly focus
+    on making content and visuals that make the ideas clear while also keeping my colorful bubble
+    style. I usually get my ideas from social media so I can design things based on trends and the
+    modern vibe. I aim to work with brands that need help pushing their identity, but my overall goal
+    is to grow as a designer and build me own network of design.
+      </p>
+      <p>
+        I believe art should feel alive — full of energy, surprise, and a genuine
+        point of view. Every piece is made with intention and a little bit of joy.
+      </p>
+      <p>
+        Commissions, prints, and collaborations are always welcome.
+      </p>
+      <div class="about-tags">
+        <span class="tag">Painting</span>
+        <span class="tag">Illustration</span>
+        <span class="tag">Mixed media</span>
+        <span class="tag">Commissions open</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-banner" id="contact">
+    <div>
+      <h2>Let's make something<br>together</h2>
+      <p>Commissions, collaborations &amp; inquiries welcome.</p>
+    </div>
+    <!-- Replace href with your actual email -->
+    <a class="contact-btn" href="mailto:hello@youremail.com">Get in touch &rarr;</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Danielle. All rights reserved.</p>
+    <div class="socials">
+      <!-- Replace # with your real links -->
+      <a href="#">Instagram</a>
+      <a href="#">Pinterest</a>
+      <a href="#">Shop</a>
+    </div>
+  </footer>
+
+</body>
+</html>
