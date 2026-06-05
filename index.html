@@ -14,7 +14,6 @@
     --ink: #1a1612;
     --rust: #b84c1e;
     --rust-light: #d4622a;
-    --olive: #5a6132;
     --tan: #c8b898;
     --tan-light: #ddd0b8;
     --paper: #faf7f2;
@@ -32,7 +31,6 @@
     overflow-x: hidden;
   }
 
-  /* ─── GRAIN OVERLAY ─── */
   body::before {
     content: '';
     position: fixed;
@@ -43,7 +41,7 @@
     opacity: 0.35;
   }
 
-  /* ─── NAVIGATION ─── */
+  /* ─── NAV ─── */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -51,30 +49,31 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 3rem;
-    height: 64px;
+    padding: 0 2rem;
+    height: 60px;
     background: var(--ink);
     border-bottom: 3px solid var(--rust);
   }
 
   .logo {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
+    font-size: 1.8rem;
     letter-spacing: 0.1em;
     color: var(--cream);
     text-decoration: none;
+    cursor: pointer;
   }
   .logo span { color: var(--rust); }
 
   .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: 1.5rem;
     list-style: none;
   }
 
   .nav-links a {
     font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--tan);
@@ -85,15 +84,57 @@
   .nav-links a:hover { color: var(--rust-light); }
   .nav-links a.active { color: var(--rust); }
 
+  /* Hamburger */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--tan);
+    transition: all 0.3s;
+  }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 60px; left: 0; right: 0;
+    background: var(--ink);
+    border-bottom: 2px solid var(--rust);
+    z-index: 99;
+    padding: 1.5rem 2rem;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--tan);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover, .mobile-menu a.active { color: var(--rust); }
+
   /* ─── PAGES ─── */
-  .page { display: none; padding-top: 64px; }
+  .page { display: none; padding-top: 60px; }
   .page.active { display: block; }
 
-  /* ─── HERO SECTION (Work page) ─── */
+  /* ─── HERO ─── */
   .hero {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    min-height: calc(100vh - 64px);
+    min-height: calc(100vh - 60px);
     border-bottom: 2px solid var(--ink);
   }
 
@@ -101,7 +142,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 5rem 4rem;
+    padding: 4rem 3rem;
     background: var(--paper);
     border-right: 2px solid var(--ink);
     position: relative;
@@ -111,7 +152,7 @@
     content: '';
     position: absolute;
     bottom: 2rem; right: 2rem;
-    width: 80px; height: 80px;
+    width: 60px; height: 60px;
     border: 2px solid var(--tan);
     border-radius: 50%;
     opacity: 0.4;
@@ -119,11 +160,11 @@
 
   .hero-eyebrow {
     font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--rust);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -134,15 +175,16 @@
     width: 2rem;
     height: 2px;
     background: var(--rust);
+    flex-shrink: 0;
   }
 
   .hero-left h1 {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(4rem, 8vw, 7rem);
+    font-size: clamp(3rem, 7vw, 7rem);
     line-height: 0.9;
     letter-spacing: 0.02em;
     color: var(--ink);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
   }
 
   .hero-left h1 em {
@@ -156,8 +198,8 @@
   .hero-left p {
     max-width: 380px;
     color: #4a403a;
-    font-size: 1rem;
-    margin-bottom: 2.5rem;
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
     font-style: italic;
   }
 
@@ -168,20 +210,17 @@
     background: var(--ink);
     color: var(--cream);
     font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     text-decoration: none;
-    padding: 0.85rem 2rem;
+    padding: 0.8rem 1.75rem;
     border: 2px solid var(--ink);
     transition: all 0.2s;
     cursor: pointer;
     align-self: flex-start;
   }
-  .hero-cta:hover {
-    background: var(--rust);
-    border-color: var(--rust);
-  }
+  .hero-cta:hover { background: var(--rust); border-color: var(--rust); }
 
   .hero-right {
     position: relative;
@@ -190,9 +229,8 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    min-height: 500px;
+    min-height: 400px;
   }
-
   .hero-right img {
     width: 100%; height: 100%;
     object-fit: cover;
@@ -202,43 +240,42 @@
 
   .hero-badge {
     position: absolute;
-    bottom: 2rem; right: 2rem;
+    bottom: 1.5rem; right: 1.5rem;
     background: var(--rust);
     color: var(--cream);
     font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    padding: 0.5rem 1rem;
+    padding: 0.45rem 0.85rem;
     transform: rotate(2deg);
   }
 
-  /* ─── SECTION DIVIDERS ─── */
+  /* ─── SECTION HEAD ─── */
   .section-head {
     display: flex;
     align-items: center;
-    gap: 2rem;
-    padding: 2.5rem 3rem;
+    gap: 1.5rem;
+    padding: 2rem 2.5rem;
     border-bottom: 1px solid var(--tan);
     background: var(--cream-dark);
+    flex-wrap: wrap;
   }
-
   .section-head-label {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     letter-spacing: 0.1em;
     color: var(--ink);
   }
-
   .section-head-line {
     flex: 1;
     height: 1px;
     background: var(--tan);
+    min-width: 20px;
   }
-
   .section-head-count {
     font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     color: var(--rust);
     letter-spacing: 0.15em;
   }
@@ -259,7 +296,6 @@
     overflow: hidden;
     background: var(--ink);
   }
-
   .art-card-img {
     display: block;
     width: 100%;
@@ -268,19 +304,16 @@
     transition: transform 0.4s ease, opacity 0.3s;
     opacity: 0.9;
   }
-  .art-card:hover .art-card-img {
-    transform: scale(1.04);
-    opacity: 1;
-  }
+  .art-card:hover .art-card-img { transform: scale(1.04); opacity: 1; }
 
   .art-card-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(26,22,18,0.85) 0%, transparent 50%);
+    background: linear-gradient(to top, rgba(26,22,18,0.88) 0%, transparent 55%);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 1.25rem;
+    padding: 1rem;
     transform: translateY(4px);
     transition: transform 0.3s;
   }
@@ -288,31 +321,29 @@
 
   .art-card-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.2rem;
+    font-size: clamp(0.95rem, 2vw, 1.2rem);
     letter-spacing: 0.05em;
     color: var(--cream);
     line-height: 1;
   }
-
   .art-card-sub {
     font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
     color: var(--tan);
     text-transform: uppercase;
-    margin-top: 0.25rem;
+    margin-top: 0.2rem;
   }
-
   .art-card-view {
     position: absolute;
-    top: 1rem; right: 1rem;
+    top: 0.75rem; right: 0.75rem;
     background: var(--rust);
     color: white;
     font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.15em;
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    padding: 0.3rem 0.6rem;
+    padding: 0.25rem 0.5rem;
     opacity: 0;
     transition: opacity 0.2s;
   }
@@ -323,29 +354,27 @@
     position: fixed;
     inset: 0;
     z-index: 1000;
-    background: rgba(10,8,6,0.94);
+    background: rgba(10,8,6,0.95);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 1rem;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s;
   }
-  .lightbox.open {
-    opacity: 1;
-    pointer-events: all;
-  }
+  .lightbox.open { opacity: 1; pointer-events: all; }
 
   .lightbox-inner {
     max-width: 900px;
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 280px;
-    gap: 0;
+    grid-template-columns: 1fr 260px;
     background: var(--paper);
     border: 3px solid var(--ink);
     position: relative;
+    max-height: 90vh;
+    overflow: hidden;
   }
 
   .lightbox-img-wrap {
@@ -354,93 +383,83 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 400px;
+    min-height: 320px;
   }
-
   .lightbox-img-wrap img {
     max-width: 100%;
-    max-height: 70vh;
+    max-height: 80vh;
     object-fit: contain;
     display: block;
   }
 
   .lightbox-info {
-    padding: 2rem 1.5rem;
+    padding: 1.75rem 1.25rem;
     border-left: 2px solid var(--ink);
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
   }
-
   .lightbox-num {
     font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     letter-spacing: 0.2em;
     color: var(--rust);
     text-transform: uppercase;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
   }
-
   .lightbox-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.2rem;
+    font-size: 2rem;
     line-height: 1;
     letter-spacing: 0.05em;
     color: var(--ink);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
   }
-
   .lightbox-meta {
     font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--rust);
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1.25rem;
     border-bottom: 1px solid var(--tan);
   }
-
   .lightbox-desc {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     color: #4a403a;
     font-style: italic;
     line-height: 1.7;
     flex: 1;
   }
-
   .lightbox-nav {
     display: flex;
     gap: 0.5rem;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
   }
-
   .lb-btn {
     flex: 1;
-    padding: 0.6rem;
+    padding: 0.55rem;
     background: none;
     border: 1.5px solid var(--tan);
     font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--ink);
     cursor: pointer;
     transition: all 0.2s;
   }
-  .lb-btn:hover {
-    background: var(--ink);
-    color: var(--cream);
-    border-color: var(--ink);
-  }
+  .lb-btn:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
 
   .lightbox-close {
     position: absolute;
-    top: -2px; right: -52px;
-    width: 44px; height: 44px;
+    top: 0; right: -48px;
+    width: 40px; height: 40px;
     background: var(--rust);
     border: none;
     color: white;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -454,53 +473,66 @@
   .about-hero {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    min-height: calc(100vh - 64px);
+    min-height: calc(100vh - 60px);
     border-bottom: 2px solid var(--ink);
   }
-
   .about-img-col {
     position: relative;
     overflow: hidden;
     background: var(--ink);
     border-right: 2px solid var(--ink);
-    min-height: 500px;
+    min-height: 400px;
   }
-
   .about-img-col img {
     width: 100%; height: 100%;
     object-fit: cover;
     opacity: 0.8;
     display: block;
   }
-
   .about-img-label {
     position: absolute;
     bottom: 2rem; left: 2rem;
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     letter-spacing: 0.25em;
     color: var(--tan);
     writing-mode: vertical-rl;
     text-transform: uppercase;
   }
-
   .about-text-col {
-    padding: 5rem 4rem;
+    padding: 4rem 3rem;
     background: var(--paper);
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
-
+  .about-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .about-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 2px;
+    background: var(--rust);
+    flex-shrink: 0;
+  }
   .about-text-col h2 {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(3.5rem, 6vw, 6rem);
+    font-size: clamp(3rem, 5.5vw, 6rem);
     line-height: 0.9;
     letter-spacing: 0.02em;
     color: var(--ink);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
   }
-
   .about-text-col h2 em {
     color: var(--rust);
     font-style: italic;
@@ -508,74 +540,65 @@
     font-size: 0.8em;
     display: block;
   }
-
   .about-rule {
     width: 4rem;
     height: 3px;
     background: var(--rust);
-    margin: 1.5rem 0;
+    margin: 1.25rem 0;
   }
-
   .about-text-col p {
     max-width: 460px;
     color: #4a403a;
-    font-size: 1rem;
-    margin-bottom: 1.25rem;
+    font-size: 0.95rem;
+    margin-bottom: 1.1rem;
     line-height: 1.8;
   }
-
   .about-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-top: 1rem;
   }
-
   .tag {
     font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--rust);
     border: 1.5px solid var(--rust);
-    padding: 0.3rem 0.75rem;
+    padding: 0.28rem 0.7rem;
   }
 
-  /* About info panels */
   .about-panels {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     border-top: 2px solid var(--ink);
     border-left: 2px solid var(--ink);
   }
-
   .about-panel {
     border-right: 2px solid var(--ink);
-    padding: 3rem 2.5rem;
+    padding: 2.5rem 2rem;
     background: var(--cream);
     position: relative;
   }
-
   .about-panel::before {
     content: attr(data-num);
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 5rem;
+    font-size: 4rem;
     color: var(--tan-light);
     position: absolute;
-    top: 1rem; right: 1.5rem;
+    top: 1rem; right: 1.25rem;
     line-height: 1;
   }
-
   .about-panel h3 {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     letter-spacing: 0.05em;
     color: var(--rust);
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
   }
-
   .about-panel p {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: #5a5048;
     line-height: 1.7;
   }
@@ -584,12 +607,11 @@
   .contact-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    min-height: calc(100vh - 64px);
+    min-height: calc(100vh - 60px);
   }
-
   .contact-left {
     background: var(--ink);
-    padding: 5rem 4rem;
+    padding: 4rem 3rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -597,11 +619,10 @@
     position: relative;
     overflow: hidden;
   }
-
   .contact-left::before {
     content: 'CONTACT';
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 12rem;
+    font-size: 10rem;
     color: rgba(255,255,255,0.03);
     position: absolute;
     bottom: -1rem; left: -1rem;
@@ -609,16 +630,14 @@
     letter-spacing: 0.05em;
     pointer-events: none;
   }
-
   .contact-left h2 {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-size: clamp(2.5rem, 4.5vw, 5.5rem);
     line-height: 0.9;
     letter-spacing: 0.02em;
     color: var(--cream);
     position: relative;
   }
-
   .contact-left h2 em {
     color: var(--rust-light);
     font-style: italic;
@@ -626,89 +645,73 @@
     display: block;
     font-size: 0.7em;
   }
-
-  .contact-left p {
+  .contact-left > p {
     color: var(--tan);
     font-style: italic;
-    font-size: 1.05rem;
-    max-width: 340px;
+    font-size: 1rem;
+    max-width: 320px;
     line-height: 1.7;
     position: relative;
   }
-
   .contact-socials {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
     position: relative;
   }
-
   .contact-social-link {
     font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--tan);
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.75rem;
     transition: color 0.2s;
+    word-break: break-all;
   }
   .contact-social-link:hover { color: var(--rust-light); }
-  .contact-social-link::before {
-    content: '→';
-    color: var(--rust);
-  }
+  .contact-social-link::before { content: '→'; color: var(--rust); flex-shrink: 0; }
 
   .contact-right {
     background: var(--paper);
-    padding: 5rem 4rem;
+    padding: 4rem 3rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
-
   .contact-right h3 {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.8rem;
+    font-size: 1.7rem;
     letter-spacing: 0.05em;
     color: var(--ink);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
   }
-
   .form-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--rust);
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-  .form-eyebrow::before {
-    content: '';
-    width: 2rem;
-    height: 2px;
-    background: var(--rust);
-  }
-
-  .form-group {
-    margin-bottom: 1.5rem;
-  }
-
-  .form-group label {
-    display: block;
     font-family: 'DM Mono', monospace;
     font-size: 0.65rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--rust);
-    margin-bottom: 0.5rem;
+    margin-bottom: 1.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
   }
+  .form-eyebrow::before { content: ''; width: 2rem; height: 2px; background: var(--rust); flex-shrink: 0; }
 
+  .form-group { margin-bottom: 1.25rem; }
+  .form-group label {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 0.45rem;
+  }
   .form-group input,
   .form-group textarea,
   .form-group select {
@@ -717,21 +720,19 @@
     border: 1.5px solid var(--tan);
     border-top: 1.5px solid var(--ink);
     border-left: 1.5px solid var(--ink);
-    padding: 0.8rem 1rem;
+    padding: 0.75rem 0.9rem;
     font-family: 'Unna', serif;
     font-size: 1rem;
     color: var(--ink);
     outline: none;
     transition: border-color 0.2s;
     appearance: none;
+    -webkit-appearance: none;
   }
   .form-group input:focus,
   .form-group textarea:focus,
-  .form-group select:focus {
-    border-color: var(--rust);
-    background: white;
-  }
-  .form-group textarea { min-height: 120px; resize: vertical; }
+  .form-group select:focus { border-color: var(--rust); background: white; }
+  .form-group textarea { min-height: 110px; resize: vertical; }
 
   .form-submit {
     display: inline-flex;
@@ -740,31 +741,29 @@
     background: var(--ink);
     color: var(--cream);
     border: 2px solid var(--ink);
-    padding: 0.9rem 2.5rem;
+    padding: 0.85rem 2rem;
     font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.2s;
-    margin-top: 0.5rem;
+    margin-top: 0.4rem;
   }
-  .form-submit:hover {
-    background: var(--rust);
-    border-color: var(--rust);
-  }
+  .form-submit:hover { background: var(--rust); border-color: var(--rust); }
 
   .contact-email-big {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     letter-spacing: 0.05em;
     color: var(--rust);
     text-decoration: none;
     display: block;
-    margin-top: 2rem;
-    padding-top: 2rem;
+    margin-top: 1.75rem;
+    padding-top: 1.75rem;
     border-top: 1px solid var(--tan);
     transition: color 0.2s;
+    word-break: break-all;
   }
   .contact-email-big:hover { color: var(--ink); }
 
@@ -775,38 +774,35 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.5rem 3rem;
+    padding: 1.25rem 2rem;
     border-top: 3px solid var(--rust);
+    flex-wrap: wrap;
+    gap: 0.75rem;
   }
-
   footer p {
     font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
   }
-
-  footer .footer-links {
-    display: flex;
-    gap: 1.5rem;
-  }
-
-  footer .footer-links a {
+  .footer-links { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+  .footer-links a {
     font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--tan);
     text-decoration: none;
     transition: color 0.2s;
+    cursor: pointer;
   }
-  footer .footer-links a:hover { color: var(--rust-light); }
+  .footer-links a:hover { color: var(--rust-light); }
 
   /* ─── FORM SUCCESS ─── */
   .form-success {
     display: none;
     text-align: center;
-    padding: 3rem;
+    padding: 2.5rem;
     border: 2px dashed var(--rust);
     margin-top: 1rem;
   }
@@ -820,35 +816,153 @@
   }
   .form-success span {
     font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--ink);
   }
 
+  /* ════════════════════════════════════
+     TABLET  (max 900px)
+  ════════════════════════════════════ */
+  @media (max-width: 900px) {
+    nav { padding: 0 1.25rem; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+
+    .hero {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+    .hero-right {
+      min-height: 55vw;
+      border-top: 2px solid var(--ink);
+      border-right: none;
+    }
+    .hero-left { border-right: none; padding: 3rem 2rem; }
+
+    .gallery { grid-template-columns: repeat(2, 1fr); }
+
+    .about-hero {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+    .about-img-col {
+      min-height: 55vw;
+      border-right: none;
+      border-bottom: 2px solid var(--ink);
+    }
+    .about-text-col { padding: 3rem 2rem; }
+
+    .about-panels { grid-template-columns: 1fr 1fr; }
+    .about-panel:last-child {
+      grid-column: 1 / -1;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .contact-layout {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+    .contact-left {
+      padding: 3rem 2rem;
+      border-right: none;
+      border-bottom: 3px solid var(--rust);
+      min-height: auto;
+    }
+    .contact-left::before { font-size: 6rem; }
+    .contact-right { padding: 3rem 2rem; }
+
+    .lightbox-inner {
+      grid-template-columns: 1fr;
+      max-height: 88vh;
+      overflow-y: auto;
+    }
+    .lightbox-img-wrap { min-height: 200px; max-height: 45vh; }
+    .lightbox-img-wrap img { max-height: 45vh; }
+    .lightbox-info { border-left: none; border-top: 2px solid var(--ink); }
+    .lightbox-close { top: -44px; right: 0; width: 40px; height: 40px; }
+  }
+
+  /* ════════════════════════════════════
+     MOBILE  (max 580px)
+  ════════════════════════════════════ */
+  @media (max-width: 580px) {
+    nav { padding: 0 1rem; }
+
+    .hero-left { padding: 2.5rem 1.25rem; }
+    .hero-left h1 { font-size: clamp(2.8rem, 14vw, 4.5rem); }
+    .hero-right { min-height: 60vw; }
+    .hero-badge { font-size: 0.55rem; padding: 0.35rem 0.65rem; bottom: 1rem; right: 1rem; }
+
+    .section-head { padding: 1.5rem 1.25rem; gap: 1rem; }
+    .section-head-label { font-size: 1.2rem; }
+
+    .gallery { grid-template-columns: 1fr 1fr; }
+    .art-card-title { font-size: 0.85rem; }
+    .art-card-sub { display: none; }
+    .art-card-overlay { padding: 0.6rem; }
+
+    .about-text-col { padding: 2.5rem 1.25rem; }
+    .about-text-col h2 { font-size: clamp(2.5rem, 12vw, 4rem); }
+
+    .about-panels { grid-template-columns: 1fr; }
+    .about-panel { padding: 2rem 1.25rem; }
+    .about-panel:last-child { grid-column: auto; border-bottom: 2px solid var(--ink); }
+
+    .contact-left { padding: 2.5rem 1.25rem; }
+    .contact-left h2 { font-size: clamp(2.2rem, 10vw, 4rem); }
+    .contact-right { padding: 2.5rem 1.25rem; }
+    .contact-email-big { font-size: 1rem; }
+
+    .lightbox { padding: 0.5rem; }
+    .lightbox-inner { border-width: 2px; }
+    .lightbox-close { position: fixed; top: 0.5rem; right: 0.5rem; z-index: 1001; }
+    .lightbox-title { font-size: 1.6rem; }
+    .lightbox-info { padding: 1.25rem 1rem; }
+
+    footer { padding: 1rem 1.25rem; }
+  }
+
+  /* ════════════════════════════════════
+     SMALL MOBILE (max 380px)
+  ════════════════════════════════════ */
+  @media (max-width: 380px) {
+    .gallery { grid-template-columns: 1fr; }
+    .hero-left h1 { font-size: 2.6rem; }
+  }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <a class="logo" href="#" onclick="showPage('work')">Dani<span>elle</span></a>
+  <span class="logo" onclick="showPage('work')">Dani<span>elle</span></span>
   <ul class="nav-links">
-    <li><a href="#" id="nav-work" onclick="showPage('work')" class="active">Work</a></li>
-    <li><a href="#" id="nav-about" onclick="showPage('about')">About</a></li>
-    <li><a href="#" id="nav-contact" onclick="showPage('contact')">Contact</a></li>
+    <li><a id="nav-work" onclick="showPage('work')" class="active">Work</a></li>
+    <li><a id="nav-about" onclick="showPage('about')">About</a></li>
+    <li><a id="nav-contact" onclick="showPage('contact')">Contact</a></li>
   </ul>
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a id="mob-work" onclick="showPage('work')" class="active">Work</a>
+  <a id="mob-about" onclick="showPage('about')">About</a>
+  <a id="mob-contact" onclick="showPage('contact')">Contact</a>
+</div>
 
 <!-- ═══════════════════════════ WORK PAGE ═══════════════════════════ -->
 <div id="page-work" class="page active">
-
   <section class="hero">
     <div class="hero-left">
       <p class="hero-eyebrow">Portfolio — 2026</p>
       <h1>Making art<br><em>with intention</em></h1>
       <p>Bold color, playful composition, and the everyday wonder that makes life worth noticing.</p>
-      <a class="hero-cta" onclick="document.getElementById('gallery-anchor').scrollIntoView({behavior:'smooth'})">View my work →</a>
+      <span class="hero-cta" onclick="document.getElementById('gallery-anchor').scrollIntoView({behavior:'smooth'})">View my work →</span>
     </div>
     <div class="hero-right">
       <img src="images/vibration.jpg" alt="Featured artwork" onerror="this.style.display='none'; this.parentElement.style.background='#3a2e28'"/>
@@ -864,140 +978,87 @@
   </div>
 
   <section class="gallery">
-
     <div class="art-card" onclick="openLightbox(0)">
       <img class="art-card-img" src="images/Broucher.jpg" alt="Paul Rand Brochure" onerror="this.style.background='#3a2e28'; this.removeAttribute('src')"/>
       <div class="art-card-view">View</div>
-      <div class="art-card-overlay">
-        <div class="art-card-title">Paul Rand Brochure</div>
-        <div class="art-card-sub">Graphic Design · 2026</div>
-      </div>
+      <div class="art-card-overlay"><div class="art-card-title">Paul Rand Brochure</div><div class="art-card-sub">Graphic Design · 2026</div></div>
     </div>
-
     <div class="art-card" onclick="openLightbox(1)">
       <img class="art-card-img" src="images/design_dale_swan copy.jpg" alt="Swanlake" onerror="this.style.background='#3a2e28'; this.removeAttribute('src')"/>
       <div class="art-card-view">View</div>
-      <div class="art-card-overlay">
-        <div class="art-card-title">Swanlake</div>
-        <div class="art-card-sub">Graphic Design · 2026</div>
-      </div>
+      <div class="art-card-overlay"><div class="art-card-title">Swanlake</div><div class="art-card-sub">Graphic Design · 2026</div></div>
     </div>
-
     <div class="art-card" onclick="openLightbox(2)">
       <img class="art-card-img" src="images/sun-moon.jpg" alt="Scale" onerror="this.style.background='#3a2e28'; this.removeAttribute('src')"/>
       <div class="art-card-view">View</div>
-      <div class="art-card-overlay">
-        <div class="art-card-title">Scale</div>
-        <div class="art-card-sub">Graphic Design · 2026</div>
-      </div>
+      <div class="art-card-overlay"><div class="art-card-title">Scale</div><div class="art-card-sub">Graphic Design · 2026</div></div>
     </div>
-
     <div class="art-card" onclick="openLightbox(3)">
       <img class="art-card-img" src="images/paperair.jpg" alt="Airplane Instructions" onerror="this.style.background='#3a2e28'; this.removeAttribute('src')"/>
       <div class="art-card-view">View</div>
-      <div class="art-card-overlay">
-        <div class="art-card-title">Airplane Instructions</div>
-        <div class="art-card-sub">Graphic Design · 2026</div>
-      </div>
+      <div class="art-card-overlay"><div class="art-card-title">Airplane Instructions</div><div class="art-card-sub">Graphic Design · 2026</div></div>
     </div>
-
     <div class="art-card" onclick="openLightbox(4)">
       <img class="art-card-img" src="images/dragon.jpg" alt="Life Cycle" onerror="this.style.background='#3a2e28'; this.removeAttribute('src')"/>
       <div class="art-card-view">View</div>
-      <div class="art-card-overlay">
-        <div class="art-card-title">Life Cycle</div>
-        <div class="art-card-sub">Graphic Design · 2026</div>
-      </div>
+      <div class="art-card-overlay"><div class="art-card-title">Life Cycle</div><div class="art-card-sub">Graphic Design · 2026</div></div>
     </div>
-
     <div class="art-card" onclick="openLightbox(5)">
       <img class="art-card-img" src="images/disney.jpg" alt="National Geographic" onerror="this.style.background='#3a2e28'; this.removeAttribute('src')"/>
       <div class="art-card-view">View</div>
-      <div class="art-card-overlay">
-        <div class="art-card-title">National Geographic</div>
-        <div class="art-card-sub">Graphic Design · 2026</div>
-      </div>
+      <div class="art-card-overlay"><div class="art-card-title">National Geographic</div><div class="art-card-sub">Graphic Design · 2026</div></div>
     </div>
-
     <div class="art-card" onclick="openLightbox(6)">
       <img class="art-card-img" src="images/guitar.jpg" alt="Guitar Poem" onerror="this.style.background='#3a2e28'; this.removeAttribute('src')"/>
       <div class="art-card-view">View</div>
-      <div class="art-card-overlay">
-        <div class="art-card-title">Guitar Poem</div>
-        <div class="art-card-sub">Graphic Design · 2026</div>
-      </div>
+      <div class="art-card-overlay"><div class="art-card-title">Guitar Poem</div><div class="art-card-sub">Graphic Design · 2026</div></div>
     </div>
-
     <div class="art-card" onclick="openLightbox(7)">
       <img class="art-card-img" src="images/pokemon.jpg" alt="Pokemon Typography" onerror="this.style.background='#3a2e28'; this.removeAttribute('src')"/>
       <div class="art-card-view">View</div>
-      <div class="art-card-overlay">
-        <div class="art-card-title">Pokemon Typography</div>
-        <div class="art-card-sub">Graphic Design · 2026</div>
-      </div>
+      <div class="art-card-overlay"><div class="art-card-title">Pokemon Typography</div><div class="art-card-sub">Graphic Design · 2026</div></div>
     </div>
-
     <div class="art-card" onclick="openLightbox(8)">
       <img class="art-card-img" src="images/blur.jpg" alt="Blur Effect" onerror="this.style.background='#3a2e28'; this.removeAttribute('src')"/>
       <div class="art-card-view">View</div>
-      <div class="art-card-overlay">
-        <div class="art-card-title">Blur Effect</div>
-        <div class="art-card-sub">Graphic Design · 2026</div>
-      </div>
+      <div class="art-card-overlay"><div class="art-card-title">Blur Effect</div><div class="art-card-sub">Graphic Design · 2026</div></div>
     </div>
-
     <div class="art-card" onclick="openLightbox(9)">
       <img class="art-card-img" src="images/goals.jpg" alt="Goals" onerror="this.style.background='#3a2e28'; this.removeAttribute('src')"/>
       <div class="art-card-view">View</div>
-      <div class="art-card-overlay">
-        <div class="art-card-title">Goals</div>
-        <div class="art-card-sub">Graphic Design · 2026</div>
-      </div>
+      <div class="art-card-overlay"><div class="art-card-title">Goals</div><div class="art-card-sub">Graphic Design · 2026</div></div>
     </div>
-
     <div class="art-card" onclick="openLightbox(10)">
       <img class="art-card-img" src="images/path.jpg" alt="Road Map" onerror="this.style.background='#3a2e28'; this.removeAttribute('src')"/>
       <div class="art-card-view">View</div>
-      <div class="art-card-overlay">
-        <div class="art-card-title">Road Map</div>
-        <div class="art-card-sub">Graphic Design · 2026</div>
-      </div>
+      <div class="art-card-overlay"><div class="art-card-title">Road Map</div><div class="art-card-sub">Graphic Design · 2026</div></div>
     </div>
-
     <div class="art-card" onclick="openLightbox(11)">
       <img class="art-card-img" src="images/contract.jpg" alt="Contract Work" onerror="this.style.background='#3a2e28'; this.removeAttribute('src')"/>
       <div class="art-card-view">View</div>
-      <div class="art-card-overlay">
-        <div class="art-card-title">Contract Work</div>
-        <div class="art-card-sub">Graphic Design · 2026</div>
-      </div>
+      <div class="art-card-overlay"><div class="art-card-title">Contract Work</div><div class="art-card-sub">Graphic Design · 2026</div></div>
     </div>
-
   </section>
 
   <footer>
     <p>© 2026 Danielle. All rights reserved.</p>
     <div class="footer-links">
-      <a href="#" onclick="showPage('work')">Work</a>
-      <a href="#" onclick="showPage('about')">About</a>
-      <a href="#" onclick="showPage('contact')">Contact</a>
+      <a onclick="showPage('work')">Work</a>
+      <a onclick="showPage('about')">About</a>
+      <a onclick="showPage('contact')">Contact</a>
     </div>
   </footer>
 </div>
 
 <!-- ═══════════════════════════ ABOUT PAGE ═══════════════════════════ -->
 <div id="page-about" class="page">
-
   <section class="about-hero">
     <div class="about-img-col">
       <img src="images/danielle.jpg" alt="Danielle" onerror="this.style.display='none'"/>
       <span class="about-img-label">Danielle · Designer</span>
     </div>
     <div class="about-text-col">
-      <div class="hero-eyebrow" style="color:var(--rust); font-family:'DM Mono',monospace; font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase; display:flex; align-items:center; gap:0.75rem; margin-bottom:1.5rem;">
-        <span style="display:inline-block; width:2rem; height:2px; background:var(--rust);"></span>
-        About the Artist
-      </div>
+      <div class="about-eyebrow">About the Artist</div>
       <h2>Hi, I'm<br><em>Danielle</em></h2>
       <div class="about-rule"></div>
       <p>My name is Dani — a graphic and web designer working in the Puget Sound region. I specialize in creating graphics that blend storytelling with personal touches, making content and visuals that make ideas clear while keeping my colorful, distinctive style.</p>
@@ -1008,7 +1069,6 @@
         <span class="tag">Web Design</span>
         <span class="tag">Illustration</span>
         <span class="tag">Typography</span>
-    
       </div>
     </div>
   </section>
@@ -1031,22 +1091,20 @@
   <footer>
     <p>© 2026 Danielle. All rights reserved.</p>
     <div class="footer-links">
-      <a href="#" onclick="showPage('work')">Work</a>
-      <a href="#" onclick="showPage('about')">About</a>
-      <a href="#" onclick="showPage('contact')">Contact</a>
+      <a onclick="showPage('work')">Work</a>
+      <a onclick="showPage('about')">About</a>
+      <a onclick="showPage('contact')">Contact</a>
     </div>
-    
   </footer>
 </div>
 
 <!-- ═══════════════════════════ CONTACT PAGE ═══════════════════════════ -->
 <div id="page-contact" class="page">
-
   <section class="contact-layout">
     <div class="contact-left">
       <div>
-        <div style="font-family:'DM Mono',monospace; font-size:0.65rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--rust); margin-bottom:1.5rem; display:flex; align-items:center; gap:0.75rem;">
-          <span style="display:inline-block; width:2rem; height:2px; background:var(--rust);"></span>
+        <div style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--rust);margin-bottom:1.25rem;display:flex;align-items:center;gap:0.75rem;">
+          <span style="display:inline-block;width:2rem;height:2px;background:var(--rust);flex-shrink:0;"></span>
           Get In Touch
         </div>
         <h2>Let's make<br>something<br><em>together</em></h2>
@@ -1056,11 +1114,9 @@
         <a href="mailto:danielledale612@gmail.com" class="contact-social-link">danielledale612@gmail.com</a>
       </div>
     </div>
-
     <div class="contact-right">
       <div class="form-eyebrow">Send a message</div>
       <h3>Start a project</h3>
-
       <div id="contact-form">
         <div class="form-group">
           <label>Your name</label>
@@ -1087,27 +1143,24 @@
         </div>
         <button class="form-submit" onclick="submitForm()">Send message →</button>
       </div>
-
       <div class="form-success" id="form-success">
         <p>Message sent!</p>
         <span>I'll be in touch soon. Thank you!</span>
       </div>
-
       <a href="mailto:danielledale612@gmail.com" class="contact-email-big">danielledale612@gmail.com →</a>
     </div>
   </section>
-
   <footer>
     <p>© 2026 Danielle. All rights reserved.</p>
     <div class="footer-links">
-      <a href="#" onclick="showPage('work')">Work</a>
-      <a href="#" onclick="showPage('about')">About</a>
-      <a href="#" onclick="showPage('contact')">Contact</a>
+      <a onclick="showPage('work')">Work</a>
+      <a onclick="showPage('about')">About</a>
+      <a onclick="showPage('contact')">Contact</a>
     </div>
   </footer>
 </div>
 
-<!-- ═══════════════════════════ LIGHTBOX ═══════════════════════════ -->
+<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
   <div class="lightbox-inner">
     <button class="lightbox-close" onclick="closeLightbox()">✕</button>
@@ -1129,18 +1182,18 @@
 
 <script>
 const pieces = [
-  { src:'images/Broucher.jpg',  title:'Paul Rand Brochure',    meta:'Graphic Design · 2026', desc:'A brochure design exploring Paul Rand\'s foundational principles of modern graphic design — bold geometry, economy of form, and expressive type.' },
-  { src:'images/design_dale_swan copy.jpg',  title:'Swanlake',              meta:'Graphic Design · 2026', desc:'A visual poem inspired by the elegance and drama of Swan Lake, pairing graceful typography with fluid compositional movement.' },
-  { src:'images/sun-moon.jpg',  title:'Scale',                 meta:'Graphic Design · 2026', desc:'An exploration of duality and balance between celestial forms — sun and moon held in visual tension through composition and contrast.' },
-  { src:'images/paperair.jpg',  title:'Airplane Instructions', meta:'Graphic Design · 2026', desc:'Step-by-step instructions reimagined as graphic design — clear, playful, and grounded in the joy of following direction toward flight.' },
-  { src:'images/dragon.jpg',    title:'Life Cycle',            meta:'Graphic Design · 2026', desc:'A visual narrative of transformation and growth, tracing the arc of a life cycle through layered imagery and symbolic form.' },
-  { src:'images/disney.jpg',    title:'National Geographic',   meta:'Graphic Design · 2026', desc:'Editorial-inspired design capturing the expansive spirit of National Geographic — wonder, discovery, and visual storytelling.' },
-  { src:'images/guitar.jpg',    title:'Guitar Poem',           meta:'Graphic Design · 2026', desc:'Type meets music in this lyrical piece — a poem and an instrument, each lending their rhythm to the other.' },
-  { src:'images/pokemon.jpg',   title:'Pokemon Typography',    meta:'Graphic Design · 2026', desc:'Type as creature — a playful typographic study using Pokémon as the conceptual lens for expressive letterform design.' },
-  { src:'images/blur.jpg',      title:'Blur Effect',           meta:'Graphic Design · 2026', desc:'Motion, memory, and the edges of perception — a design study in what happens between sharp focus and beautiful noise.' },
-  { src:'images/goals.jpg',     title:'Goals',                 meta:'Graphic Design · 2026', desc:'A motivational typographic piece about intention and direction, designed to inspire clarity and forward movement.' },
-  { src:'images/path.jpg',      title:'Road Map',              meta:'Graphic Design · 2026', desc:'Every journey starts with knowing where you are. This piece maps paths, choices, and the beautiful uncertainty of what comes next.' },
-  { src:'images/contract.jpg',  title:'Contract Work',         meta:'Graphic Design · 2026', desc:'Professional deliverable work — the craft of designing for a client\'s vision while bringing your own touch to every decision.' },
+  { src:'images/Broucher.jpg', title:'Paul Rand Brochure', meta:'Graphic Design · 2026', desc:'A brochure design exploring Paul Rand\'s foundational principles of modern graphic design — bold geometry, economy of form, and expressive type.' },
+  { src:'images/design_dale_swan copy.jpg', title:'Swanlake', meta:'Graphic Design · 2026', desc:'A visual poem inspired by the elegance and drama of Swan Lake, pairing graceful typography with fluid compositional movement.' },
+  { src:'images/sun-moon.jpg', title:'Scale', meta:'Graphic Design · 2026', desc:'An exploration of duality and balance between celestial forms — sun and moon held in visual tension through composition and contrast.' },
+  { src:'images/paperair.jpg', title:'Airplane Instructions', meta:'Graphic Design · 2026', desc:'Step-by-step instructions reimagined as graphic design — clear, playful, and grounded in the joy of following direction toward flight.' },
+  { src:'images/dragon.jpg', title:'Life Cycle', meta:'Graphic Design · 2026', desc:'A visual narrative of transformation and growth, tracing the arc of a life cycle through layered imagery and symbolic form.' },
+  { src:'images/disney.jpg', title:'National Geographic', meta:'Graphic Design · 2026', desc:'Editorial-inspired design capturing the expansive spirit of National Geographic — wonder, discovery, and visual storytelling.' },
+  { src:'images/guitar.jpg', title:'Guitar Poem', meta:'Graphic Design · 2026', desc:'Type meets music in this lyrical piece — a poem and an instrument, each lending their rhythm to the other.' },
+  { src:'images/pokemon.jpg', title:'Pokemon Typography', meta:'Graphic Design · 2026', desc:'Type as creature — a playful typographic study using Pokémon as the conceptual lens for expressive letterform design.' },
+  { src:'images/blur.jpg', title:'Blur Effect', meta:'Graphic Design · 2026', desc:'Motion, memory, and the edges of perception — a design study in what happens between sharp focus and beautiful noise.' },
+  { src:'images/goals.jpg', title:'Goals', meta:'Graphic Design · 2026', desc:'A motivational typographic piece about intention and direction, designed to inspire clarity and forward movement.' },
+  { src:'images/path.jpg', title:'Road Map', meta:'Graphic Design · 2026', desc:'Every journey starts with knowing where you are. This piece maps paths, choices, and the beautiful uncertainty of what comes next.' },
+  { src:'images/contract.jpg', title:'Contract Work', meta:'Graphic Design · 2026', desc:'Professional deliverable work — the craft of designing for a client\'s vision while bringing your own touch to every decision.' },
 ];
 
 let currentIdx = 0;
@@ -1151,7 +1204,6 @@ function openLightbox(i) {
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-
 function renderLightbox() {
   const p = pieces[currentIdx];
   document.getElementById('lb-img').src = p.src;
@@ -1161,25 +1213,15 @@ function renderLightbox() {
   document.getElementById('lb-desc').textContent = p.desc;
   document.getElementById('lb-num').textContent = String(currentIdx+1).padStart(2,'0') + ' / ' + String(pieces.length).padStart(2,'0');
 }
-
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('open');
   document.body.style.overflow = '';
 }
-
 function closeLightboxOutside(e) {
   if (e.target === document.getElementById('lightbox')) closeLightbox();
 }
-
-function lbPrev() {
-  currentIdx = (currentIdx - 1 + pieces.length) % pieces.length;
-  renderLightbox();
-}
-
-function lbNext() {
-  currentIdx = (currentIdx + 1) % pieces.length;
-  renderLightbox();
-}
+function lbPrev() { currentIdx = (currentIdx - 1 + pieces.length) % pieces.length; renderLightbox(); }
+function lbNext() { currentIdx = (currentIdx + 1) % pieces.length; renderLightbox(); }
 
 document.addEventListener('keydown', function(e) {
   const lb = document.getElementById('lightbox');
@@ -1194,7 +1236,14 @@ function showPage(id) {
   document.getElementById('page-' + id).classList.add('active');
   document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
   document.getElementById('nav-' + id).classList.add('active');
-  window.scrollTo(0,0);
+  document.querySelectorAll('.mobile-menu a').forEach(a => a.classList.remove('active'));
+  document.getElementById('mob-' + id).classList.add('active');
+  document.getElementById('mobile-menu').classList.remove('open');
+  window.scrollTo(0, 0);
+}
+
+function toggleMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
 }
 
 function submitForm() {
@@ -1205,6 +1254,5 @@ function submitForm() {
   document.getElementById('form-success').classList.add('show');
 }
 </script>
-
 </body>
 </html>
