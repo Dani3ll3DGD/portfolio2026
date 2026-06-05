@@ -1,260 +1,1210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Danielle — Art Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles/port.css" />  
- 
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Danielle — Art Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Unna:ital,wght@0,400;0,700;1,400;1,700&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --cream-dark: #ede6d6;
+    --ink: #1a1612;
+    --rust: #b84c1e;
+    --rust-light: #d4622a;
+    --olive: #5a6132;
+    --tan: #c8b898;
+    --tan-light: #ddd0b8;
+    --paper: #faf7f2;
+    --red-accent: #c0392b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Unna', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── GRAIN OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.35;
+  }
+
+  /* ─── NAVIGATION ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3rem;
+    height: 64px;
+    background: var(--ink);
+    border-bottom: 3px solid var(--rust);
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.1em;
+    color: var(--cream);
+    text-decoration: none;
+  }
+  .logo span { color: var(--rust); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--tan);
+    text-decoration: none;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+  .nav-links a:hover { color: var(--rust-light); }
+  .nav-links a.active { color: var(--rust); }
+
+  /* ─── PAGES ─── */
+  .page { display: none; padding-top: 64px; }
+  .page.active { display: block; }
+
+  /* ─── HERO SECTION (Work page) ─── */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 64px);
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 4rem;
+    background: var(--paper);
+    border-right: 2px solid var(--ink);
+    position: relative;
+  }
+
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    bottom: 2rem; right: 2rem;
+    width: 80px; height: 80px;
+    border: 2px solid var(--tan);
+    border-radius: 50%;
+    opacity: 0.4;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 2px;
+    background: var(--rust);
+  }
+
+  .hero-left h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 8vw, 7rem);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-left h1 em {
+    color: var(--rust);
+    font-style: italic;
+    font-family: 'Unna', serif;
+    font-size: 0.75em;
+    display: block;
+  }
+
+  .hero-left p {
+    max-width: 380px;
+    color: #4a403a;
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+    font-style: italic;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.85rem 2rem;
+    border: 2px solid var(--ink);
+    transition: all 0.2s;
+    cursor: pointer;
+    align-self: flex-start;
+  }
+  .hero-cta:hover {
+    background: var(--rust);
+    border-color: var(--rust);
+  }
+
+  .hero-right {
+    position: relative;
+    background: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    min-height: 500px;
+  }
+
+  .hero-right img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+    display: block;
+  }
+
+  .hero-badge {
+    position: absolute;
+    bottom: 2rem; right: 2rem;
+    background: var(--rust);
+    color: var(--cream);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    transform: rotate(2deg);
+  }
+
+  /* ─── SECTION DIVIDERS ─── */
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 2.5rem 3rem;
+    border-bottom: 1px solid var(--tan);
+    background: var(--cream-dark);
+  }
+
+  .section-head-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+  }
+
+  .section-head-line {
+    flex: 1;
+    height: 1px;
+    background: var(--tan);
+  }
+
+  .section-head-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--rust);
+    letter-spacing: 0.15em;
+  }
+
+  /* ─── GALLERY ─── */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-left: 2px solid var(--ink);
+    border-top: 2px solid var(--ink);
+  }
+
+  .art-card {
+    border-right: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    background: var(--ink);
+  }
+
+  .art-card-img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    transition: transform 0.4s ease, opacity 0.3s;
+    opacity: 0.9;
+  }
+  .art-card:hover .art-card-img {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+
+  .art-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(26,22,18,0.85) 0%, transparent 50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.25rem;
+    transform: translateY(4px);
+    transition: transform 0.3s;
+  }
+  .art-card:hover .art-card-overlay { transform: translateY(0); }
+
+  .art-card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.05em;
+    color: var(--cream);
+    line-height: 1;
+  }
+
+  .art-card-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--tan);
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+  }
+
+  .art-card-view {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    background: var(--rust);
+    color: white;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.6rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .art-card:hover .art-card-view { opacity: 1; }
+
+  /* ─── LIGHTBOX ─── */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(10,8,6,0.94);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .lightbox.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .lightbox-inner {
+    max-width: 900px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 0;
+    background: var(--paper);
+    border: 3px solid var(--ink);
+    position: relative;
+  }
+
+  .lightbox-img-wrap {
+    overflow: hidden;
+    background: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+  }
+
+  .lightbox-img-wrap img {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    display: block;
+  }
+
+  .lightbox-info {
+    padding: 2rem 1.5rem;
+    border-left: 2px solid var(--ink);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .lightbox-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--rust);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .lightbox-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .lightbox-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--tan);
+  }
+
+  .lightbox-desc {
+    font-size: 0.9rem;
+    color: #4a403a;
+    font-style: italic;
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  .lightbox-nav {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 2rem;
+  }
+
+  .lb-btn {
+    flex: 1;
+    padding: 0.6rem;
+    background: none;
+    border: 1.5px solid var(--tan);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .lb-btn:hover {
+    background: var(--ink);
+    color: var(--cream);
+    border-color: var(--ink);
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: -2px; right: -52px;
+    width: 44px; height: 44px;
+    background: var(--rust);
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    transition: background 0.2s;
+  }
+  .lightbox-close:hover { background: var(--red-accent); }
+
+  /* ─── ABOUT PAGE ─── */
+  .about-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 64px);
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .about-img-col {
+    position: relative;
+    overflow: hidden;
+    background: var(--ink);
+    border-right: 2px solid var(--ink);
+    min-height: 500px;
+  }
+
+  .about-img-col img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+    display: block;
+  }
+
+  .about-img-label {
+    position: absolute;
+    bottom: 2rem; left: 2rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    color: var(--tan);
+    writing-mode: vertical-rl;
+    text-transform: uppercase;
+  }
+
+  .about-text-col {
+    padding: 5rem 4rem;
+    background: var(--paper);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .about-text-col h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 6vw, 6rem);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .about-text-col h2 em {
+    color: var(--rust);
+    font-style: italic;
+    font-family: 'Unna', serif;
+    font-size: 0.8em;
+    display: block;
+  }
+
+  .about-rule {
+    width: 4rem;
+    height: 3px;
+    background: var(--rust);
+    margin: 1.5rem 0;
+  }
+
+  .about-text-col p {
+    max-width: 460px;
+    color: #4a403a;
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.8;
+  }
+
+  .about-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rust);
+    border: 1.5px solid var(--rust);
+    padding: 0.3rem 0.75rem;
+  }
+
+  /* About info panels */
+  .about-panels {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 2px solid var(--ink);
+    border-left: 2px solid var(--ink);
+  }
+
+  .about-panel {
+    border-right: 2px solid var(--ink);
+    padding: 3rem 2.5rem;
+    background: var(--cream);
+    position: relative;
+  }
+
+  .about-panel::before {
+    content: attr(data-num);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5rem;
+    color: var(--tan-light);
+    position: absolute;
+    top: 1rem; right: 1.5rem;
+    line-height: 1;
+  }
+
+  .about-panel h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    color: var(--rust);
+    margin-bottom: 1rem;
+  }
+
+  .about-panel p {
+    font-size: 0.95rem;
+    color: #5a5048;
+    line-height: 1.7;
+  }
+
+  /* ─── CONTACT PAGE ─── */
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 64px);
+  }
+
+  .contact-left {
+    background: var(--ink);
+    padding: 5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 3px solid var(--rust);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-left::before {
+    content: 'CONTACT';
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 12rem;
+    color: rgba(255,255,255,0.03);
+    position: absolute;
+    bottom: -1rem; left: -1rem;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    pointer-events: none;
+  }
+
+  .contact-left h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    color: var(--cream);
+    position: relative;
+  }
+
+  .contact-left h2 em {
+    color: var(--rust-light);
+    font-style: italic;
+    font-family: 'Unna', serif;
+    display: block;
+    font-size: 0.7em;
+  }
+
+  .contact-left p {
+    color: var(--tan);
+    font-style: italic;
+    font-size: 1.05rem;
+    max-width: 340px;
+    line-height: 1.7;
+    position: relative;
+  }
+
+  .contact-socials {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    position: relative;
+  }
+
+  .contact-social-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--tan);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: color 0.2s;
+  }
+  .contact-social-link:hover { color: var(--rust-light); }
+  .contact-social-link::before {
+    content: '→';
+    color: var(--rust);
+  }
+
+  .contact-right {
+    background: var(--paper);
+    padding: 5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .contact-right h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .form-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .form-eyebrow::before {
+    content: '';
+    width: 2rem;
+    height: 2px;
+    background: var(--rust);
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 0.5rem;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    background: var(--cream);
+    border: 1.5px solid var(--tan);
+    border-top: 1.5px solid var(--ink);
+    border-left: 1.5px solid var(--ink);
+    padding: 0.8rem 1rem;
+    font-family: 'Unna', serif;
+    font-size: 1rem;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--rust);
+    background: white;
+  }
+  .form-group textarea { min-height: 120px; resize: vertical; }
+
+  .form-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--ink);
+    color: var(--cream);
+    border: 2px solid var(--ink);
+    padding: 0.9rem 2.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 0.5rem;
+  }
+  .form-submit:hover {
+    background: var(--rust);
+    border-color: var(--rust);
+  }
+
+  .contact-email-big {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    color: var(--rust);
+    text-decoration: none;
+    display: block;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--tan);
+    transition: color 0.2s;
+  }
+  .contact-email-big:hover { color: var(--ink); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--ink);
+    color: var(--tan);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 3rem;
+    border-top: 3px solid var(--rust);
+  }
+
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  footer .footer-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  footer .footer-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--tan);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  footer .footer-links a:hover { color: var(--rust-light); }
+
+  /* ─── FORM SUCCESS ─── */
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 3rem;
+    border: 2px dashed var(--rust);
+    margin-top: 1rem;
+  }
+  .form-success.show { display: block; }
+  .form-success p {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.05em;
+    color: var(--rust);
+    margin-bottom: 0.5rem;
+  }
+  .form-success span {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+</style>
 </head>
 <body>
 
-  <nav>
-    <a class="logo" href="#">Danielle</a>
-    <ul class="nav-links">
-      <li><a href="#work">Work</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#" onclick="showPage('work')">Dani<span>elle</span></a>
+  <ul class="nav-links">
+    <li><a href="#" id="nav-work" onclick="showPage('work')" class="active">Work</a></li>
+    <li><a href="#" id="nav-about" onclick="showPage('about')">About</a></li>
+    <li><a href="#" id="nav-contact" onclick="showPage('contact')">Contact</a></li>
+  </ul>
+</nav>
 
-  <!-- HERO -->
+<!-- ═══════════════════════════ WORK PAGE ═══════════════════════════ -->
+<div id="page-work" class="page active">
+
   <section class="hero">
     <div class="hero-left">
       <p class="hero-eyebrow">Portfolio — 2026</p>
       <h1>Making art<br><em>with intention</em></h1>
       <p>Bold color, playful composition, and the everyday wonder that makes life worth noticing.</p>
-      <a class="hero-cta" href="#work">View my work &rarr;</a>
+      <a class="hero-cta" onclick="document.getElementById('gallery-anchor').scrollIntoView({behavior:'smooth'})">View my work →</a>
     </div>
     <div class="hero-right">
-    
-
-      <img src="images/vibration.jpg" alt="Featured artwork" style="width:100%; height:auto; display:block;" />
-        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#8a8278" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      </div>
-      <span class="hero-index-badge">Available for commissions</span>
+      <img src="images/vibration.jpg" alt="Featured artwork" onerror="this.style.display='none'; this.parentElement.style.background='#3a2e28'"/>
+      <span class="hero-badge">Available for Commissions</span>
     </div>
   </section>
 
-  <!-- GALLERY -->
-  <div class="divider" id="work">
-    <span class="divider-label">Selected work</span>
-    <span class="divider-line"></span>
-    <span class="divider-count">Twelve pieces</span>
+  <div id="gallery-anchor"></div>
+  <div class="section-head">
+    <span class="section-head-label">Selected Work</span>
+    <span class="section-head-line"></span>
+    <span class="section-head-count">12 pieces — 2026</span>
   </div>
 
   <section class="gallery">
 
-
-   <!-- PIECE 1 -->
-<div class="art-card">
-  <div class="art-card-inner t1" style="background:#f5f0eb; padding:0; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-    <img src="images/Broucher.jpg" alt="Paul Rand Brochure" 
-         style="width:100%; height:auto; display:block;" />
-  </div>
-  <div class="art-caption">
-    <strong>Paul Rand Brochure</strong>
-    <span>Graphic Design &middot; 2026</span>
-  </div>
-</div>
-
-   <div class="art-card">
-  <div class="art-card-inner t2" style="background:#f5f0eb; padding:0; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-    <img src="images/swanpoem.jpg" alt="Scale" 
-         style="width:100%; height:auto; display:block;" />
-  </div>
-  <div class="art-caption">
-    <strong>Swanlake</strong>
-    <span>Graphic Design &middot; 2026</span>
-  </div>
-</div>
-    <!-- PIECE 3 -->
-  <div class="art-card">
-  <div class="art-card-inner t2" style="background:#f5f0eb; padding:0; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-    <img src="images/sun-moon.jpg" alt="Scale" 
-         style="width:100%; height:auto; display:block;" />
-  </div>
-  <div class="art-caption">
-    <strong>Scale</strong>
-    <span>Graphic Design &middot; 2026</span>
-  </div>
-</div>
-
-    <!-- PIECE 3 -->
-  <div class="art-card">
-  <div class="art-card-inner t2" style="background:#f5f0eb; padding:0; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-    <img src="images/paperair.jpg" alt="Scale" 
-         style="width:100%; height:auto; display:block;" />
-  </div>
-  <div class="art-caption">
-    <strong>Airplane Instructions</strong>
-    <span>Graphic Design &middot; 2026</span>
-  </div>
-</div>
-
-        <!-- PIECE 3 -->
-  <div class="art-card">
-  <div class="art-card-inner t2" style="background:#f5f0eb; padding:0; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-    <img src="images/dragon.jpg" alt="Scale" 
-         style="width:100%; height:auto; display:block;" />
-  </div>
-  <div class="art-caption">
-    <strong>Life Cycle</strong>
-    <span>Graphic Design &middot; 2026</span>
-  </div>
-</div>
-
-          <!-- PIECE 3 -->
-  <div class="art-card">
-  <div class="art-card-inner t2" style="background:#f5f0eb; padding:0; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-    <img src="images/disney.jpg" alt="Scale" 
-         style="width:100%; height:auto; display:block;" />
-  </div>
-  <div class="art-caption">
-    <strong>National Geographic</strong>
-    <span>Graphic Design &middot; 2026</span>
-  </div>
-</div>
-
-            <!-- PIECE 3 -->
-  <div class="art-card">
-  <div class="art-card-inner t2" style="background:#f5f0eb; padding:0; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-    <img src="images/guitar.jpg" alt="Scale" 
-         style="width:100%; height:auto; display:block;" />
-  </div>
-  <div class="art-caption">
-    <strong>Guitar Poem</strong>
-    <span>Graphic Design &middot; 2026</span>
-  </div>
-</div>
-
-          <!-- PIECE 3 -->
-  <div class="art-card">
-  <div class="art-card-inner t2" style="background:#f5f0eb; padding:0; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-    <img src="images/pokemon.jpg" alt="Scale" 
-         style="width:100%; height:auto; display:block;" />
-  </div>
-  <div class="art-caption">
-    <strong>Pokemon Typography</strong>
-    <span>Graphic Design &middot; 2026</span>
-  </div>
-</div>
-
-           <!-- PIECE 3 -->
-  <div class="art-card">
-  <div class="art-card-inner t2" style="background:#f5f0eb; padding:0; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-    <img src="images/blur.jpg" alt="Scale" 
-         style="width:100%; height:auto; display:block;" />
-  </div>
-  <div class="art-caption">
-    <strong>Blur Effect</strong>
-    <span>Graphic Design &middot; 2026</span>
-  </div>
-</div>
-
-          <!-- PIECE 3 -->
-  <div class="art-card">
-  <div class="art-card-inner t2" style="background:#f5f0eb; padding:0; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-    <img src="images/goals.jpg" alt="Scale" 
-         style="width:100%; height:auto; display:block;" />
-  </div>
-  <div class="art-caption">
-    <strong>Goals</strong>
-    <span>Graphic Design &middot; 2026</span>
-  </div>
-</div>
-
-           <!-- PIECE 3 -->
-  <div class="art-card">
-  <div class="art-card-inner t2" style="background:#f5f0eb; padding:0; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-    <img src="images/path.jpg" alt="Scale" 
-         style="width:100%; height:auto; display:block;" />
-  </div>
-  <div class="art-caption">
-    <strong>Road Map</strong>
-    <span>Graphic Design &middot; 2026</span>
-  </div>
-</div>
-
-   <!-- PIECE 3 -->
-  <div class="art-card">
-  <div class="art-card-inner t2" style="background:#f5f0eb; padding:0; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-    <img src="images/contract.jpg" alt="Scale" 
-         style="width:100%; height:auto; display:block;" />
-  </div>
-  <div class="art-caption">
-    <strong>Contract Work</strong>
-    <span>Graphic Design &middot; 2026</span>
-  </div>
-</div>
-
-    
-
-  </section>
-
-  <!-- ABOUT -->
-  <div class="divider" id="about">
-    <span class="divider-label">About</span>
-    <span class="divider-line"></span>
-  </div>
-
-  <section class="about">
-    <div class="about-img-wrap">
-      <!--
-        
-      -->
-      <img src="images/danielle.jpg" alt="Danielle" style="width:100%; height:auto; display:block;" />
-        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#8a8278" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    <div class="art-card" onclick="openLightbox(0)">
+      <img class="art-card-img" src="images/Broucher.jpg" alt="Paul Rand Brochure" onerror="this.style.background='#3a2e28'; this.removeAttribute('src')"/>
+      <div class="art-card-view">View</div>
+      <div class="art-card-overlay">
+        <div class="art-card-title">Paul Rand Brochure</div>
+        <div class="art-card-sub">Graphic Design · 2026</div>
       </div>
     </div>
-    <div class="about-text">
-      <h2>Hi, I'm<br><em>Danielle</em></h2>
-      <p>
-     My name is Dani, Im a Graphic and Web designer working in the Puget Sound region, I
-    specialize in creating graphics that blend storytelling with my personal touches. I mostly focus
-    on making content and visuals that make the ideas clear while also keeping my colorful bubble
-    style. I usually get my ideas from social media so I can design things based on trends and the
-    modern vibe. I aim to work with brands that need help pushing their identity, but my overall goal
-    is to grow as a designer and build me own network of design.
-      </p>
-      <p>
-        I believe art should feel alive — full of energy, surprise, and a genuine
-        point of view. Every piece is made with intention and a little bit of joy.
-      </p>
-      <p>
-        Commissions, prints, and collaborations are always welcome.
-      </p>
-      <div class="about-tags">
-        <span class="tag">Painting</span>
-        <span class="tag">Illustration</span>
-        <span class="tag">Mixed media</span>
-        <span class="tag">Commissions open</span>
+
+    <div class="art-card" onclick="openLightbox(1)">
+      <img class="art-card-img" src="images/design_dale_swan copy.jpg" alt="Swanlake" onerror="this.style.background='#3a2e28'; this.removeAttribute('src')"/>
+      <div class="art-card-view">View</div>
+      <div class="art-card-overlay">
+        <div class="art-card-title">Swanlake</div>
+        <div class="art-card-sub">Graphic Design · 2026</div>
       </div>
     </div>
-  </section>
 
-  <!-- CONTACT -->
-  <section class="contact-banner" id="contact">
-    <div>
-      <h2>Let's make something<br>together</h2>
-      <p>Commissions, collaborations &amp; inquiries welcome.</p>
+    <div class="art-card" onclick="openLightbox(2)">
+      <img class="art-card-img" src="images/sun-moon.jpg" alt="Scale" onerror="this.style.background='#3a2e28'; this.removeAttribute('src')"/>
+      <div class="art-card-view">View</div>
+      <div class="art-card-overlay">
+        <div class="art-card-title">Scale</div>
+        <div class="art-card-sub">Graphic Design · 2026</div>
+      </div>
     </div>
-    <!-- Replace href with your actual email -->
-    <a class="contact-btn" href="mailto:hello@youremail.com">Get in touch &rarr;</a>
+
+    <div class="art-card" onclick="openLightbox(3)">
+      <img class="art-card-img" src="images/paperair.jpg" alt="Airplane Instructions" onerror="this.style.background='#3a2e28'; this.removeAttribute('src')"/>
+      <div class="art-card-view">View</div>
+      <div class="art-card-overlay">
+        <div class="art-card-title">Airplane Instructions</div>
+        <div class="art-card-sub">Graphic Design · 2026</div>
+      </div>
+    </div>
+
+    <div class="art-card" onclick="openLightbox(4)">
+      <img class="art-card-img" src="images/dragon.jpg" alt="Life Cycle" onerror="this.style.background='#3a2e28'; this.removeAttribute('src')"/>
+      <div class="art-card-view">View</div>
+      <div class="art-card-overlay">
+        <div class="art-card-title">Life Cycle</div>
+        <div class="art-card-sub">Graphic Design · 2026</div>
+      </div>
+    </div>
+
+    <div class="art-card" onclick="openLightbox(5)">
+      <img class="art-card-img" src="images/disney.jpg" alt="National Geographic" onerror="this.style.background='#3a2e28'; this.removeAttribute('src')"/>
+      <div class="art-card-view">View</div>
+      <div class="art-card-overlay">
+        <div class="art-card-title">National Geographic</div>
+        <div class="art-card-sub">Graphic Design · 2026</div>
+      </div>
+    </div>
+
+    <div class="art-card" onclick="openLightbox(6)">
+      <img class="art-card-img" src="images/guitar.jpg" alt="Guitar Poem" onerror="this.style.background='#3a2e28'; this.removeAttribute('src')"/>
+      <div class="art-card-view">View</div>
+      <div class="art-card-overlay">
+        <div class="art-card-title">Guitar Poem</div>
+        <div class="art-card-sub">Graphic Design · 2026</div>
+      </div>
+    </div>
+
+    <div class="art-card" onclick="openLightbox(7)">
+      <img class="art-card-img" src="images/pokemon.jpg" alt="Pokemon Typography" onerror="this.style.background='#3a2e28'; this.removeAttribute('src')"/>
+      <div class="art-card-view">View</div>
+      <div class="art-card-overlay">
+        <div class="art-card-title">Pokemon Typography</div>
+        <div class="art-card-sub">Graphic Design · 2026</div>
+      </div>
+    </div>
+
+    <div class="art-card" onclick="openLightbox(8)">
+      <img class="art-card-img" src="images/blur.jpg" alt="Blur Effect" onerror="this.style.background='#3a2e28'; this.removeAttribute('src')"/>
+      <div class="art-card-view">View</div>
+      <div class="art-card-overlay">
+        <div class="art-card-title">Blur Effect</div>
+        <div class="art-card-sub">Graphic Design · 2026</div>
+      </div>
+    </div>
+
+    <div class="art-card" onclick="openLightbox(9)">
+      <img class="art-card-img" src="images/goals.jpg" alt="Goals" onerror="this.style.background='#3a2e28'; this.removeAttribute('src')"/>
+      <div class="art-card-view">View</div>
+      <div class="art-card-overlay">
+        <div class="art-card-title">Goals</div>
+        <div class="art-card-sub">Graphic Design · 2026</div>
+      </div>
+    </div>
+
+    <div class="art-card" onclick="openLightbox(10)">
+      <img class="art-card-img" src="images/path.jpg" alt="Road Map" onerror="this.style.background='#3a2e28'; this.removeAttribute('src')"/>
+      <div class="art-card-view">View</div>
+      <div class="art-card-overlay">
+        <div class="art-card-title">Road Map</div>
+        <div class="art-card-sub">Graphic Design · 2026</div>
+      </div>
+    </div>
+
+    <div class="art-card" onclick="openLightbox(11)">
+      <img class="art-card-img" src="images/contract.jpg" alt="Contract Work" onerror="this.style.background='#3a2e28'; this.removeAttribute('src')"/>
+      <div class="art-card-view">View</div>
+      <div class="art-card-overlay">
+        <div class="art-card-title">Contract Work</div>
+        <div class="art-card-sub">Graphic Design · 2026</div>
+      </div>
+    </div>
+
   </section>
 
   <footer>
-    <p>&copy; 2026 Danielle. All rights reserved.</p>
-    <div class="socials">
-      <!-- Replace # with your real links -->
-      <a href="#">Instagram</a>
-      <a href="#">Pinterest</a>
-      <a href="#">Shop</a>
+    <p>© 2026 Danielle. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#" onclick="showPage('work')">Work</a>
+      <a href="#" onclick="showPage('about')">About</a>
+      <a href="#" onclick="showPage('contact')">Contact</a>
     </div>
   </footer>
+</div>
+
+<!-- ═══════════════════════════ ABOUT PAGE ═══════════════════════════ -->
+<div id="page-about" class="page">
+
+  <section class="about-hero">
+    <div class="about-img-col">
+      <img src="images/danielle.jpg" alt="Danielle" onerror="this.style.display='none'"/>
+      <span class="about-img-label">Danielle · Designer</span>
+    </div>
+    <div class="about-text-col">
+      <div class="hero-eyebrow" style="color:var(--rust); font-family:'DM Mono',monospace; font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase; display:flex; align-items:center; gap:0.75rem; margin-bottom:1.5rem;">
+        <span style="display:inline-block; width:2rem; height:2px; background:var(--rust);"></span>
+        About the Artist
+      </div>
+      <h2>Hi, I'm<br><em>Danielle</em></h2>
+      <div class="about-rule"></div>
+      <p>My name is Dani — a graphic and web designer working in the Puget Sound region. I specialize in creating graphics that blend storytelling with personal touches, making content and visuals that make ideas clear while keeping my colorful, distinctive style.</p>
+      <p>I draw inspiration from social media trends and modern aesthetics, designing with the contemporary moment in mind. My goal is to work with brands that need help building their identity, while growing as a designer and building my own network.</p>
+      <p>I believe art should feel alive — full of energy, surprise, and a genuine point of view. Every piece is made with intention and a little bit of joy.</p>
+      <div class="about-tags">
+        <span class="tag">Graphic Design</span>
+        <span class="tag">Web Design</span>
+        <span class="tag">Illustration</span>
+        <span class="tag">Typography</span>
+    
+      </div>
+    </div>
+  </section>
+
+  <div class="about-panels">
+    <div class="about-panel" data-num="01">
+      <h3>The Work</h3>
+      <p>Bold color, playful composition, and storytelling-through-design. Every project is approached with care for craft and a distinct visual identity.</p>
+    </div>
+    <div class="about-panel" data-num="02">
+      <h3>The Process</h3>
+      <p>Research, sketch, refine, repeat. I pull from current trends while anchoring every piece in strong typographic and compositional fundamentals.</p>
+    </div>
+    <div class="about-panel" data-num="03">
+      <h3>Let's Collaborate</h3>
+      <p>Available for commissions, brand identity projects, and creative collaborations. Based in Puget Sound, working with clients everywhere.</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 Danielle. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#" onclick="showPage('work')">Work</a>
+      <a href="#" onclick="showPage('about')">About</a>
+      <a href="#" onclick="showPage('contact')">Contact</a>
+    </div>
+    
+  </footer>
+</div>
+
+<!-- ═══════════════════════════ CONTACT PAGE ═══════════════════════════ -->
+<div id="page-contact" class="page">
+
+  <section class="contact-layout">
+    <div class="contact-left">
+      <div>
+        <div style="font-family:'DM Mono',monospace; font-size:0.65rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--rust); margin-bottom:1.5rem; display:flex; align-items:center; gap:0.75rem;">
+          <span style="display:inline-block; width:2rem; height:2px; background:var(--rust);"></span>
+          Get In Touch
+        </div>
+        <h2>Let's make<br>something<br><em>together</em></h2>
+      </div>
+      <p>Commissions, brand collaborations, and creative inquiries are always welcome. I'd love to hear about your project.</p>
+      <div class="contact-socials">
+        <a href="mailto:danielledale612@gmail.com" class="contact-social-link">danielledale612@gmail.com</a>
+      </div>
+    </div>
+
+    <div class="contact-right">
+      <div class="form-eyebrow">Send a message</div>
+      <h3>Start a project</h3>
+
+      <div id="contact-form">
+        <div class="form-group">
+          <label>Your name</label>
+          <input type="text" id="f-name" placeholder="First and last name"/>
+        </div>
+        <div class="form-group">
+          <label>Email address</label>
+          <input type="email" id="f-email" placeholder="you@example.com"/>
+        </div>
+        <div class="form-group">
+          <label>Project type</label>
+          <select id="f-type">
+            <option value="">Select one…</option>
+            <option>Brand Identity</option>
+            <option>Illustration / Print</option>
+            <option>Web Design</option>
+            <option>Commission</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tell me about your project</label>
+          <textarea id="f-msg" placeholder="What are you working on?"></textarea>
+        </div>
+        <button class="form-submit" onclick="submitForm()">Send message →</button>
+      </div>
+
+      <div class="form-success" id="form-success">
+        <p>Message sent!</p>
+        <span>I'll be in touch soon. Thank you!</span>
+      </div>
+
+      <a href="mailto:danielledale612@gmail.com" class="contact-email-big">danielledale612@gmail.com →</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Danielle. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#" onclick="showPage('work')">Work</a>
+      <a href="#" onclick="showPage('about')">About</a>
+      <a href="#" onclick="showPage('contact')">Contact</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════ LIGHTBOX ═══════════════════════════ -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <div class="lightbox-img-wrap">
+      <img id="lb-img" src="" alt=""/>
+    </div>
+    <div class="lightbox-info">
+      <div class="lightbox-num" id="lb-num">01 / 12</div>
+      <div class="lightbox-title" id="lb-title">Title</div>
+      <div class="lightbox-meta" id="lb-meta">Graphic Design · 2026</div>
+      <div class="lightbox-desc" id="lb-desc">A piece created with intention and care.</div>
+      <div class="lightbox-nav">
+        <button class="lb-btn" onclick="lbPrev()">← Prev</button>
+        <button class="lb-btn" onclick="lbNext()">Next →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const pieces = [
+  { src:'images/Broucher.jpg',  title:'Paul Rand Brochure',    meta:'Graphic Design · 2026', desc:'A brochure design exploring Paul Rand\'s foundational principles of modern graphic design — bold geometry, economy of form, and expressive type.' },
+  { src:'images/design_dale_swan copy.jpg',  title:'Swanlake',              meta:'Graphic Design · 2026', desc:'A visual poem inspired by the elegance and drama of Swan Lake, pairing graceful typography with fluid compositional movement.' },
+  { src:'images/sun-moon.jpg',  title:'Scale',                 meta:'Graphic Design · 2026', desc:'An exploration of duality and balance between celestial forms — sun and moon held in visual tension through composition and contrast.' },
+  { src:'images/paperair.jpg',  title:'Airplane Instructions', meta:'Graphic Design · 2026', desc:'Step-by-step instructions reimagined as graphic design — clear, playful, and grounded in the joy of following direction toward flight.' },
+  { src:'images/dragon.jpg',    title:'Life Cycle',            meta:'Graphic Design · 2026', desc:'A visual narrative of transformation and growth, tracing the arc of a life cycle through layered imagery and symbolic form.' },
+  { src:'images/disney.jpg',    title:'National Geographic',   meta:'Graphic Design · 2026', desc:'Editorial-inspired design capturing the expansive spirit of National Geographic — wonder, discovery, and visual storytelling.' },
+  { src:'images/guitar.jpg',    title:'Guitar Poem',           meta:'Graphic Design · 2026', desc:'Type meets music in this lyrical piece — a poem and an instrument, each lending their rhythm to the other.' },
+  { src:'images/pokemon.jpg',   title:'Pokemon Typography',    meta:'Graphic Design · 2026', desc:'Type as creature — a playful typographic study using Pokémon as the conceptual lens for expressive letterform design.' },
+  { src:'images/blur.jpg',      title:'Blur Effect',           meta:'Graphic Design · 2026', desc:'Motion, memory, and the edges of perception — a design study in what happens between sharp focus and beautiful noise.' },
+  { src:'images/goals.jpg',     title:'Goals',                 meta:'Graphic Design · 2026', desc:'A motivational typographic piece about intention and direction, designed to inspire clarity and forward movement.' },
+  { src:'images/path.jpg',      title:'Road Map',              meta:'Graphic Design · 2026', desc:'Every journey starts with knowing where you are. This piece maps paths, choices, and the beautiful uncertainty of what comes next.' },
+  { src:'images/contract.jpg',  title:'Contract Work',         meta:'Graphic Design · 2026', desc:'Professional deliverable work — the craft of designing for a client\'s vision while bringing your own touch to every decision.' },
+];
+
+let currentIdx = 0;
+
+function openLightbox(i) {
+  currentIdx = i;
+  renderLightbox();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function renderLightbox() {
+  const p = pieces[currentIdx];
+  document.getElementById('lb-img').src = p.src;
+  document.getElementById('lb-img').alt = p.title;
+  document.getElementById('lb-title').textContent = p.title;
+  document.getElementById('lb-meta').textContent = p.meta;
+  document.getElementById('lb-desc').textContent = p.desc;
+  document.getElementById('lb-num').textContent = String(currentIdx+1).padStart(2,'0') + ' / ' + String(pieces.length).padStart(2,'0');
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeLightboxOutside(e) {
+  if (e.target === document.getElementById('lightbox')) closeLightbox();
+}
+
+function lbPrev() {
+  currentIdx = (currentIdx - 1 + pieces.length) % pieces.length;
+  renderLightbox();
+}
+
+function lbNext() {
+  currentIdx = (currentIdx + 1) % pieces.length;
+  renderLightbox();
+}
+
+document.addEventListener('keydown', function(e) {
+  const lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') lbPrev();
+  if (e.key === 'ArrowRight') lbNext();
+});
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById('nav-' + id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function submitForm() {
+  const name = document.getElementById('f-name').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  if (!name || !email) { alert('Please fill in your name and email.'); return; }
+  document.getElementById('contact-form').style.display = 'none';
+  document.getElementById('form-success').classList.add('show');
+}
+</script>
 
 </body>
 </html>
